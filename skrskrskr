@@ -1,0 +1,22 @@
+#Дана последовательность из n вещественных чисел, среди
+#которых есть хотя бы одно отрицательное. Найти наибольшее среди
+#отрицательных чисел этой последовательности.
+
+#include <iostream>
+using namespace std;
+int main ()
+{
+  double n;
+  double max_otr = -9999;
+  while (n)
+  {
+    cin >> n;
+    if (n < 0)
+     {
+       if (max_otr < n)
+       max_otr = n;
+      }
+   }
+  cout << max_otr;
+  return 0;
+  }
