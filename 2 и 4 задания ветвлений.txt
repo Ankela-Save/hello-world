@@ -1,0 +1,88 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+main ()
+{
+  double x,y;
+  double R,R1;
+  cin >> x >> y;
+  R = 12 - sqrt(x*x+y*y);
+
+  if (x*y >= 0) // 1 и 3 четверть {4,6,5}
+  {
+      if (fabs(x) <= 6 && fabs(y) <= 6) // попадание в квадратик {6}
+      {
+
+          R1 = min(fabs(x),fabs(y));
+          if (R > R1) cout << R1;
+          else cout << R;
+      }
+      else if (y>=x) // {4}
+      {
+          R1 = min(sqrt(pow(0-x,2)+pow(6-y,2)),sqrt(pow(-6-x,2)+pow(0-y,2))); // ищем наименьшее расстояние между расстояний от А до точки и от С до точки
+          if (R > R1) cout << R1;
+          else cout << R;
+      }
+      else // {5}
+      {
+          R1 = min(sqrt(pow(6-x,2)+pow(0-y,2)),sqrt(pow(0-x,2)+pow(-6-y,2))); // ищем наименьшее расстояние между расстояний от C1 до точки и от A1 до точки
+          if (R > R1) cout << R1;
+          else cout << R;
+      }
+  }
+  else // 2 и 4 четверть {1,2,3}
+  {
+      if ((fabs(x)>6)&&(fabs(y)>6)) // {1}
+      {
+          double R2;
+          R1 = min(sqrt(pow(-12-x,2)+pow(12-y,2)),sqrt(pow(12-x,2)+pow(-12-y,2))); // ищем наименьшее расстояние между расстояний от D до точки и от D1 до точки
+          R2 = min(sqrt(pow(-6-x,2)+pow(6-y,2)),sqrt(pow(6-x,2)+pow(-6-y,2))); // ищем наименьшее расстояние между расстояний от B до точки и от B1 до точки
+          if (R1 > R2) R1 = R2;
+          R = min(12-fabs(y),12-fabs(x));
+          if (R > R1) cout << R1;
+          else cout << R;
+      }
+      else // {2,3}
+      {
+          if (fabs(x)>fabs(y)) // {2}
+          {
+              R1 = min(12-fabs(x),fabs(fabs(x)-6));
+              cout << R1;
+          }
+          else // {3}
+          {
+              R1 = min(12-fabs(y),fabs(fabs(y)-6));
+              cout << R1;
+          }
+      }
+  }
+   return 0;
+}
+
+/*  Определить кратчайшее расстояние от заданной точки до границы заданной фигуры, считая, что точка находится внутри фигуры 
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+   double k,R,b,A;
+   cin >> k >> b >> R;
+   setlocale(LC_ALL, "rus");
+   A=(b*b)/(1+k*k); // для условия касания прямой и окружности
+   if (A == R*R) cout << "1 общая точка" << endl;
+   else if (A < R*R) cout << "2 общих точек" << endl;
+   else cout << "0 общих точек" << endl;
+   return 0;
+}
+
+/* Определить, сколько общих точек у прямой y=kx+b и окружности x*x+y*y=R*R
+
+Условие касания прямой и окружности (b*b)/(1+k*k) = R*R
+
+Предлагаю будущему себе следующие тесты:
+1 общая точка - k = 0; b = 1; R = 1
+2 общих точек - k = 1; b = 1; R = 1
+0 общих точек - k = 1; b = 10; R = 1;*/
